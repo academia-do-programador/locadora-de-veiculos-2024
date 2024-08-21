@@ -1,6 +1,7 @@
 ﻿using LocadoraDeVeiculos.Dominio.Compartilhado;
 
 namespace LocadoraDeVeiculos.Dominio.ModuloGrupoVeiculos;
+
 public class GrupoVeiculos : EntidadeBase
 {
     protected GrupoVeiculos() { }
