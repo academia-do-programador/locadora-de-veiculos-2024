@@ -21,9 +21,4 @@
     <ProjectReference Include="..\LocadoraDeVeiculos.Infra.Orm\LocadoraDeVeiculos.Infra.Orm.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\" />
-    <Folder Include="Mapping\" />
-  </ItemGroup>
-
 </Project>

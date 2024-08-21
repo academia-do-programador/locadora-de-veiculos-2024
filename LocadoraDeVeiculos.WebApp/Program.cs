@@ -1,4 +1,7 @@
+using LocadoraDeVeiculos.Aplicacao.ModuloGrupoVeiculos;
+using LocadoraDeVeiculos.Dominio.ModuloGrupoVeiculos;
 using LocadoraDeVeiculos.Infra.Orm.Compartilhado;
+using LocadoraDeVeiculos.Infra.Orm.ModuloGrupoVeiculos;
 using System.Reflection;
 
 namespace LocadoraDeVeiculos.WebApp;
@@ -10,6 +13,9 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
 
         builder.Services.AddDbContext<LocadoraDbContext>();
+
+        builder.Services.AddScoped<IRepositorioGrupoVeiculos, RepositorioGrupoVeiculosEmOrm>();
+        builder.Services.AddScoped<ServicoGrupoVeiculos>();
 
         builder.Services.AddAutoMapper(cfg =>
         {
@@ -28,7 +34,7 @@ public class Program
 
         // Redireciona requisições HTTP para HTTPS
         app.UseHttpsRedirection();
-        
+
         app.UseStaticFiles();
 
         app.UseRouting();
