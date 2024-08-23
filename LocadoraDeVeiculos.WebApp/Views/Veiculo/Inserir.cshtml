@@ -8,16 +8,22 @@
 
 <div class="col">
     <div class="row gap-3 my-3 my-xl-5">
-        <form class="col-lg-6 d-grid gap-3 fs-5" asp-action="Inserir">
+        <form class="col-lg-6 d-grid gap-3 fs-5" asp-action="Inserir" enctype="multipart/form-data">
+            <div>
+                <label asp-for="Foto" class="control-label"></label>
+                <input asp-for="Foto" class="form-control" type="file" accept="image/jpeg"/>
+                <span asp-validation-for="Foto" class="text-danger"></span>
+            </div>
+
             <div>
                 <label class="control-label fw-semibold mb-1">Modelo</label>
-                <input class="form-control mb-1" asp-for="Modelo" />
+                <input class="form-control mb-1" asp-for="Modelo"/>
                 <span class="text-danger fs-6" asp-validation-for="Modelo"></span>
             </div>
 
             <div>
                 <label class="control-label fw-semibold mb-1">Marca</label>
-                <input class="form-control mb-1" asp-for="Marca" />
+                <input class="form-control mb-1" asp-for="Marca"/>
                 <span class="text-danger fs-6" asp-validation-for="Marca"></span>
             </div>
 
@@ -29,7 +35,7 @@
 
             <div>
                 <label class="control-label fw-semibold mb-1">Capacidade do Tanque</label>
-                <input class="form-control mb-1" asp-for="CapacidadeTanque" type="number" />
+                <input class="form-control mb-1" asp-for="CapacidadeTanque" type="number"/>
                 <span class="text-danger fs-6" asp-validation-for="CapacidadeTanque"></span>
             </div>
 
