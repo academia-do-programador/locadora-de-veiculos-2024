@@ -16,7 +16,9 @@ public class Taxa : EntidadeBase
     public decimal Valor { get; set; }
     public TipoCobrancaEnum TipoCobranca { get; set; }
 
-    public Taxa(string nome, decimal valor, TipoCobrancaEnum tipoCobranca)
+    protected Taxa() { }
+
+    public Taxa(string nome, decimal valor, TipoCobrancaEnum tipoCobranca) : this()
     {
         Nome = nome;
         Valor = valor;
