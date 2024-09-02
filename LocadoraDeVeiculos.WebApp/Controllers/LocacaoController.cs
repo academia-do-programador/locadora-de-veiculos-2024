@@ -125,9 +125,34 @@ public class LocacaoController : WebControllerBase
     [HttpPost]
     public IActionResult RealizarDevolucao(RealizarDevolucaoViewModel devolucaoVm)
     {
-        var locacaoOriginal = servicoLocacao.SelecionarPorId(devolucaoVm.Id).Value;
+        var locacao = mapeador.Map<Locacao>(devolucaoVm);
 
-        var locacaoAtualizada = mapeador.Map<RealizarDevolucaoViewModel, Locacao>(devolucaoVm, locacaoOriginal);
+        var confirmarVm = mapeador.Map<ConfirmarDevolucaoLocacaoViewModel>(locacao);
+
+        TempData["LocacaoParaDevolucao"] = JsonSerializer.Serialize(confirmarVm);
+
+        return RedirectToAction("ConfirmarDevolucao");
+
+    }
+
+    public IActionResult ConfirmarDevolucao()
+    {
+        if (TempData["LocacaoParaDevolucao"] is null)
+            return RedirectToAction(nameof(Listar));
+
+        var locacaoDataJson = TempData["LocacaoParaDevolucao"]!.ToString();
+
+        var confirmarVm = JsonSerializer.Deserialize<ConfirmarDevolucaoLocacaoViewModel>(locacaoDataJson);
+
+        return View(confirmarVm);
+    }
+
+    [HttpPost]
+    public IActionResult ConfirmarDevolucao(ConfirmarDevolucaoLocacaoViewModel confirmarVm)
+    {
+        var locacaoOriginal = servicoLocacao.SelecionarPorId(confirmarVm.Id).Value;
+
+        var locacaoAtualizada = mapeador.Map<ConfirmarDevolucaoLocacaoViewModel, Locacao>(confirmarVm, locacaoOriginal);
 
         var resultado = servicoLocacao.RealizarDevolucao(locacaoAtualizada);
 

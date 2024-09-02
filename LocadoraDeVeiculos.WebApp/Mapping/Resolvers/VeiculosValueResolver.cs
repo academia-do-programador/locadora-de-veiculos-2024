@@ -18,7 +18,7 @@ public class VeiculosValueResolver : IValueResolver<Locacao, FormularioLocacaoVi
     public IEnumerable<SelectListItem>? Resolve(Locacao source, FormularioLocacaoViewModel destination, IEnumerable<SelectListItem>? destMember,
         ResolutionContext context)
     {
-        if (destination is RealizarDevolucaoViewModel or ConfirmarAberturaLocacaoViewModel)
+        if (destination is RealizarDevolucaoViewModel or ConfirmarAberturaLocacaoViewModel or ConfirmarDevolucaoLocacaoViewModel)
         {
             var veiculoSelecionado = _servicoVeiculo.SelecionarPorId(source.VeiculoId).Value;
 

@@ -1,5 +1,6 @@
 ﻿using LocadoraDeVeiculos.Dominio.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloGrupoVeiculos;
+using LocadoraDeVeiculos.Dominio.ModuloLocacao;
 
 namespace LocadoraDeVeiculos.Dominio.ModuloVeiculo;
 
@@ -60,5 +61,22 @@ public class Veiculo : EntidadeBase
     public void Desocupar()
     {
         Alugado = false;
+    }
+
+    public decimal CalcularLitrosParaAbastecimento(MarcadorCombustivelEnum marcadorCombustivel)
+    {
+        switch (marcadorCombustivel)
+        {
+            case MarcadorCombustivelEnum.Vazio: return CapacidadeTanque;
+
+            case MarcadorCombustivelEnum.UmQuarto: return (CapacidadeTanque - (CapacidadeTanque * 1 / 4));
+
+            case MarcadorCombustivelEnum.MeioTanque: return (CapacidadeTanque - (CapacidadeTanque * 1 / 2));
+
+            case MarcadorCombustivelEnum.TresQuartos: return (CapacidadeTanque - (CapacidadeTanque * 3 / 4));
+
+            default:
+                return 0;
+        }
     }
 }

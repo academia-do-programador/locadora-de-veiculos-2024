@@ -23,7 +23,6 @@ using LocadoraDeVeiculos.Infra.Orm.ModuloLocacao;
 using LocadoraDeVeiculos.Infra.Orm.ModuloPlanoCobranca;
 using LocadoraDeVeiculos.Infra.Orm.ModuloTaxa;
 using LocadoraDeVeiculos.Infra.Orm.ModuloVeiculo;
-using LocadoraDeVeiculos.WebApp.Mapping;
 using LocadoraDeVeiculos.WebApp.Mapping.Resolvers;
 using System.Reflection;
 
@@ -63,6 +62,7 @@ public class Program
         builder.Services.AddScoped<CondutoresValueResolver>();
         builder.Services.AddScoped<VeiculosValueResolver>();
         builder.Services.AddScoped<ValorParcialValueResolver>();
+        builder.Services.AddScoped<ValorTotalValueResolver>();
 
         builder.Services.AddAutoMapper(cfg =>
         {

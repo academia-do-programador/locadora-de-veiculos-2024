@@ -76,6 +76,57 @@ public class Locacao : EntidadeBase
         return (DataDevolucao - DevolucaoPrevista).Value.Days > 0;
     }
 
+    public decimal CalcularValorParcial(PlanoCobranca planoSelecionado)
+    {
+        var quantidadeDiasPercorridos = ObterQuantidadeDeDiasPercorridos();
+
+        decimal valorPlano = planoSelecionado.CalcularValor(
+            quantidadeDiasPercorridos,
+            QuilometragemPercorrida,
+            TipoPlano
+        );
+
+        decimal valorTaxas = 0;
+
+        if (TaxasSelecionadas.Count > 0)
+            valorTaxas = TaxasSelecionadas.Sum(tx => tx.CalcularValor(quantidadeDiasPercorridos));
+
+        return valorPlano + valorTaxas;
+    }
+
+    public decimal CalcularValorTotal(PlanoCobranca planoCobranca)
+    {
+        var valorParcial = CalcularValorParcial(planoCobranca);
+
+        decimal totalAbastecimento = 0;
+
+        if (Veiculo is not null && ConfiguracaoCombustivel is not null)
+        {
+            var valorCombustivel = ConfiguracaoCombustivel.ObterValorCombustivel(Veiculo.TipoCombustivel);
+
+            totalAbastecimento = Veiculo.CalcularLitrosParaAbastecimento(MarcadorCombustivel) * valorCombustivel;
+        }
+
+        decimal valorTotal = valorParcial + totalAbastecimento;
+
+        if (TemMulta()) // Multa de 10%
+            valorTotal += valorTotal * (10m / 100m);
+
+        return valorTotal;
+    }
+
+    private int ObterQuantidadeDeDiasPercorridos()
+    {
+        int qtdDiasLocacao;
+
+        if (DataDevolucao is null)
+            qtdDiasLocacao = (DevolucaoPrevista.Date - DataLocacao.Date).Days;
+        else
+            qtdDiasLocacao = (DataDevolucao - DataLocacao).Value.Days;
+
+        return qtdDiasLocacao;
+    }
+
     public override List<string> Validar()
     {
         List<string> erros = [];
@@ -96,35 +147,5 @@ public class Locacao : EntidadeBase
             erros.Add("A data prevista da entrega não pode ser menor que data da locação");
 
         return erros;
-    }
-
-    public decimal CalcularValorParcial(PlanoCobranca planoSelecionado)
-    {
-        var quantidadeDiasPercorridos = ObterQuantidadeDeDiasPercorridos();
-
-        decimal valorPlano = planoSelecionado.CalcularValor(
-            quantidadeDiasPercorridos,
-            QuilometragemPercorrida,
-            TipoPlano
-        );
-
-        decimal valorTaxas = 0;
-
-        if (TaxasSelecionadas.Count > 0)
-            valorTaxas = TaxasSelecionadas.Sum(tx => tx.CalcularValor(quantidadeDiasPercorridos));
-
-        return valorPlano + valorTaxas;
-    }
-
-    private int ObterQuantidadeDeDiasPercorridos()
-    {
-        int qtdDiasLocacao;
-
-        if (DataDevolucao is null)
-            qtdDiasLocacao = (DevolucaoPrevista.Date - DataLocacao.Date).Days;
-        else
-            qtdDiasLocacao = (DataDevolucao - DataLocacao).Value.Days;
-
-        return qtdDiasLocacao;
     }
 }
