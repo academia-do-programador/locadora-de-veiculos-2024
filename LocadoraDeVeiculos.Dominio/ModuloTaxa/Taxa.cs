@@ -42,4 +42,9 @@ public class Taxa : EntidadeBase
 
         return erros;
     }
+
+    public override string ToString()
+    {
+        return $"{Valor.ToString("C2")}\t{Nome}\t({TipoCobranca.ToString()})";
+    }
 }

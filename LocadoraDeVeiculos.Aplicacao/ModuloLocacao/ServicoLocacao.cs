@@ -45,19 +45,14 @@ public class ServicoLocacao
 
     public Result<Locacao> RealizarDevolucao(Locacao locacaoParaDevolucao)
     {
-        var locacao = repositorioLocacao.SelecionarPorId(locacaoParaDevolucao.Id);
-
-        if (locacao is null)
-            return Result.Fail("A locação não foi encontrada!");
-
-        if (locacao.DataDevolucao is not null)
+        if (locacaoParaDevolucao.DataDevolucao is not null)
             return Result.Fail("A devolução já foi realizada!");
 
-        FecharLocacao(locacao);
+        FecharLocacao(locacaoParaDevolucao);
 
-        repositorioLocacao.Editar(locacao);
+        repositorioLocacao.Editar(locacaoParaDevolucao);
 
-        return Result.Ok(locacao);
+        return Result.Ok(locacaoParaDevolucao);
     }
 
     public Result<Locacao> Editar(Locacao locacaoAtualizada)
@@ -132,6 +127,7 @@ public class ServicoLocacao
 
         repositorioVeiculo.Editar(locacao.Veiculo!);
     }
+
 
     private void FecharLocacao(Locacao locacao)
     {
