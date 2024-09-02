@@ -1,10 +1,9 @@
 ﻿using AutoMapper;
+using LocadoraDeVeiculos.Aplicacao.ModuloPlanoCobranca;
 using LocadoraDeVeiculos.Aplicacao.ModuloVeiculo;
-using LocadoraDeVeiculos.Dominio.ModuloCondutor;
 using LocadoraDeVeiculos.Dominio.ModuloLocacao;
-using LocadoraDeVeiculos.Dominio.ModuloTaxa;
+using LocadoraDeVeiculos.WebApp.Mapping.Resolvers;
 using LocadoraDeVeiculos.WebApp.Models;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace LocadoraDeVeiculos.WebApp.Mapping;
 
@@ -29,91 +28,44 @@ public class LocacaoProfile : Profile
             .ForMember(l => l.Veiculos, opt => opt.MapFrom<VeiculosValueResolver>())
             .ForMember(l => l.Taxas, opt => opt.MapFrom<TaxasValueResolver>())
             .ForMember(l => l.TaxasSelecionadas,
-                opt => opt.MapFrom(src => src.TaxasSelecionadas.Select(tx => tx.Id))); ;
+                opt => opt.MapFrom(src => src.TaxasSelecionadas.Select(tx => tx.Id)));
+
+        // Check-in - Check-out
+        CreateMap<Locacao, ConfirmarAberturaLocacaoViewModel>()
+            .ForMember(l => l.ValorParcial, opt => opt.MapFrom<ValorParcialValueResolver>())
+            .ForMember(l => l.Condutores, opt => opt.MapFrom<CondutoresValueResolver>())
+            .ForMember(l => l.Veiculos, opt => opt.MapFrom<VeiculosValueResolver>())
+            .ForMember(l => l.Taxas, opt => opt.MapFrom<TaxasValueResolver>())
+            .ForMember(l => l.TaxasSelecionadas,
+                opt => opt.MapFrom(src => src.TaxasSelecionadas.Select(tx => tx.Id)));
+
+        CreateMap<ConfirmarAberturaLocacaoViewModel, Locacao>()
+            .ForMember(l => l.TaxasSelecionadas, opt => opt.MapFrom<TaxasSelecionadasValueResolver>());
     }
 }
 
-public class CondutoresValueResolver : IValueResolver<Locacao, FormularioLocacaoViewModel, IEnumerable<SelectListItem>?>
+public class ValorParcialValueResolver : IValueResolver<Locacao, ConfirmarAberturaLocacaoViewModel, decimal>
 {
-    private readonly IRepositorioCondutor _repositorioCondutor;
+    private readonly ServicoVeiculo servicoVeiculo;
+    private readonly ServicoPlanoCobranca servicoPlano;
 
-    public CondutoresValueResolver(IRepositorioCondutor repositorioCondutor)
+    public ValorParcialValueResolver(ServicoVeiculo servicoVeiculo, ServicoPlanoCobranca servicoPlano)
     {
-        _repositorioCondutor = repositorioCondutor;
+        this.servicoVeiculo = servicoVeiculo;
+        this.servicoPlano = servicoPlano;
     }
 
-    public IEnumerable<SelectListItem>? Resolve(Locacao source, FormularioLocacaoViewModel destination, IEnumerable<SelectListItem>? destMember,
-        ResolutionContext context)
-    {
-        return _repositorioCondutor
-            .SelecionarTodos()
-            .Select(c => new SelectListItem(c.Nome, c.Id.ToString()));
-    }
-}
-
-public class VeiculosValueResolver : IValueResolver<Locacao, FormularioLocacaoViewModel, IEnumerable<SelectListItem>?>
-{
-    private readonly ServicoVeiculo _servicoVeiculo;
-
-    public VeiculosValueResolver(ServicoVeiculo servicoVeiculo)
-    {
-        _servicoVeiculo = servicoVeiculo;
-    }
-
-    public IEnumerable<SelectListItem>? Resolve(Locacao source, FormularioLocacaoViewModel destination, IEnumerable<SelectListItem>? destMember,
-        ResolutionContext context)
-    {
-        if (destination is RealizarDevolucaoViewModel)
-        {
-            var veiculoSelecionado = source.Veiculo;
-
-            return [new SelectListItem(veiculoSelecionado!.Modelo, veiculoSelecionado.Id.ToString())];
-        }
-
-        return _servicoVeiculo
-            .SelecionarTodos()
-            .Value
-            .Select(v => new SelectListItem(v.Modelo, v.Id.ToString()));
-    }
-}
-
-public class TaxasValueResolver : IValueResolver<Locacao, FormularioLocacaoViewModel, IEnumerable<SelectListItem>?>
-{
-    private readonly IRepositorioTaxa repositorioTaxa;
-
-    public TaxasValueResolver(IRepositorioTaxa repositorioTaxa)
-    {
-        this.repositorioTaxa = repositorioTaxa;
-    }
-
-    public IEnumerable<SelectListItem>? Resolve(Locacao source, FormularioLocacaoViewModel destination, IEnumerable<SelectListItem>? destMember,
-        ResolutionContext context)
-    {
-
-        return repositorioTaxa
-            .SelecionarTodos()
-            .Select(t => new SelectListItem(t.ToString(), t.Id.ToString()));
-    }
-}
-
-public class TaxasSelecionadasValueResolver : IValueResolver<FormularioLocacaoViewModel, Locacao, List<Taxa>>
-{
-    private readonly IRepositorioTaxa repositorioTaxa;
-
-    public TaxasSelecionadasValueResolver(IRepositorioTaxa repositorioTaxa)
-    {
-        this.repositorioTaxa = repositorioTaxa;
-    }
-
-    public List<Taxa> Resolve(
-        FormularioLocacaoViewModel source,
-        Locacao destination,
-        List<Taxa> destMember,
+    public decimal Resolve(
+        Locacao source,
+        ConfirmarAberturaLocacaoViewModel destination,
+        decimal destMember,
         ResolutionContext context
     )
     {
-        var idsTaxasSelecionadas = source.TaxasSelecionadas.ToList();
+        var veiculo = servicoVeiculo.SelecionarPorId(source.VeiculoId).Value;
 
-        return repositorioTaxa.SelecionarMuitos(idsTaxasSelecionadas);
+        var planoSelecionado = servicoPlano.SelecionarPorIdGrupoVeiculos(veiculo.GrupoVeiculosId).Value;
+
+        return source.CalcularValorParcial(planoSelecionado);
     }
 }

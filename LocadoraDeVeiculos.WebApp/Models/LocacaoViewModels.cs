@@ -58,6 +58,11 @@ public class RealizarDevolucaoViewModel : FormularioLocacaoViewModel
     public int Id { get; set; }
 }
 
+public class ConfirmarAberturaLocacaoViewModel : FormularioLocacaoViewModel
+{
+    public decimal ValorParcial { get; set; }
+}
+
 public class ListarLocacaoViewModel
 {
     public int Id { get; set; }

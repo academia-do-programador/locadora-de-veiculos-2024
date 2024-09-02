@@ -1,6 +1,7 @@
 ﻿using LocadoraDeVeiculos.Dominio.Compartilhado;
 using LocadoraDeVeiculos.Dominio.ModuloCombustivel;
 using LocadoraDeVeiculos.Dominio.ModuloCondutor;
+using LocadoraDeVeiculos.Dominio.ModuloPlanoCobranca;
 using LocadoraDeVeiculos.Dominio.ModuloTaxa;
 using LocadoraDeVeiculos.Dominio.ModuloVeiculo;
 
@@ -95,5 +96,35 @@ public class Locacao : EntidadeBase
             erros.Add("A data prevista da entrega não pode ser menor que data da locação");
 
         return erros;
+    }
+
+    public decimal CalcularValorParcial(PlanoCobranca planoSelecionado)
+    {
+        var quantidadeDiasPercorridos = ObterQuantidadeDeDiasPercorridos();
+
+        decimal valorPlano = planoSelecionado.CalcularValor(
+            quantidadeDiasPercorridos,
+            QuilometragemPercorrida,
+            TipoPlano
+        );
+
+        decimal valorTaxas = 0;
+
+        if (TaxasSelecionadas.Count > 0)
+            valorTaxas = TaxasSelecionadas.Sum(tx => tx.CalcularValor(quantidadeDiasPercorridos));
+
+        return valorPlano + valorTaxas;
+    }
+
+    private int ObterQuantidadeDeDiasPercorridos()
+    {
+        int qtdDiasLocacao;
+
+        if (DataDevolucao is null)
+            qtdDiasLocacao = (DevolucaoPrevista.Date - DataLocacao.Date).Days;
+        else
+            qtdDiasLocacao = (DataDevolucao - DataLocacao).Value.Days;
+
+        return qtdDiasLocacao;
     }
 }

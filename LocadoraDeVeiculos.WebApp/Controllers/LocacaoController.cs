@@ -8,6 +8,7 @@ using LocadoraDeVeiculos.WebApp.Controllers.Compartilhado;
 using LocadoraDeVeiculos.WebApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Text.Json;
 
 namespace LocadoraDeVeiculos.WebApp.Controllers;
 
@@ -65,6 +66,30 @@ public class LocacaoController : WebControllerBase
 
         var locacao = mapeador.Map<Locacao>(inserirVm);
 
+        var confirmarVm = mapeador.Map<ConfirmarAberturaLocacaoViewModel>(locacao);
+
+        TempData["LocacaoParaInsercao"] = JsonSerializer.Serialize(confirmarVm);
+
+        return RedirectToAction("ConfirmarAbertura");
+    }
+
+    public IActionResult ConfirmarAbertura()
+    {
+        if (TempData["LocacaoParaInsercao"] is null)
+            return RedirectToAction(nameof(Inserir));
+
+        var locacaoDataJson = TempData["LocacaoParaInsercao"]!.ToString();
+
+        var confirmarVm = JsonSerializer.Deserialize<ConfirmarAberturaLocacaoViewModel>(locacaoDataJson);
+
+        return View(confirmarVm);
+    }
+
+    [HttpPost]
+    public IActionResult ConfirmarAbertura(ConfirmarAberturaLocacaoViewModel confirmarVm)
+    {
+        var locacao = mapeador.Map<Locacao>(confirmarVm);
+
         var resultado = servicoLocacao.Inserir(locacao);
 
         if (resultado.IsFailed)
@@ -74,7 +99,7 @@ public class LocacaoController : WebControllerBase
             return RedirectToAction(nameof(Listar));
         }
 
-        ApresentarMensagemSucesso($"O registro ID [{locacao.Id}] foi inserido com sucesso!");
+        ApresentarMensagemSucesso($"A locação ID [{locacao.Id}] foi aberta com sucesso!");
 
         return RedirectToAction(nameof(Listar));
     }
