@@ -1,4 +1,5 @@
 ﻿using LocadoraDeVeiculos.Dominio.Compartilhado;
+using LocadoraDeVeiculos.Dominio.ModuloLocacao;
 using System.ComponentModel.DataAnnotations;
 
 namespace LocadoraDeVeiculos.Dominio.ModuloTaxa;
@@ -15,8 +16,12 @@ public class Taxa : EntidadeBase
     public string Nome { get; set; }
     public decimal Valor { get; set; }
     public TipoCobrancaEnum TipoCobranca { get; set; }
+    public List<Locacao> Locacoes { get; set; }
 
-    protected Taxa() { }
+    protected Taxa()
+    {
+        Locacoes = new List<Locacao>();
+    }
 
     public Taxa(string nome, decimal valor, TipoCobrancaEnum tipoCobranca) : this()
     {
