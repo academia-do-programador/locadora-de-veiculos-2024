@@ -7,6 +7,7 @@ using LocadoraDeVeiculos.Aplicacao.ModuloLocacao;
 using LocadoraDeVeiculos.Aplicacao.ModuloPlanoCobranca;
 using LocadoraDeVeiculos.Aplicacao.ModuloTaxa;
 using LocadoraDeVeiculos.Aplicacao.ModuloVeiculo;
+using LocadoraDeVeiculos.Dominio.ModuloAutenticacao;
 using LocadoraDeVeiculos.Dominio.ModuloCliente;
 using LocadoraDeVeiculos.Dominio.ModuloCombustivel;
 using LocadoraDeVeiculos.Dominio.ModuloCondutor;
@@ -25,6 +26,8 @@ using LocadoraDeVeiculos.Infra.Orm.ModuloPlanoCobranca;
 using LocadoraDeVeiculos.Infra.Orm.ModuloTaxa;
 using LocadoraDeVeiculos.Infra.Orm.ModuloVeiculo;
 using LocadoraDeVeiculos.WebApp.Mapping.Resolvers;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
 using System.Reflection;
 
 namespace LocadoraDeVeiculos.WebApp;
@@ -65,11 +68,39 @@ public class Program
         builder.Services.AddScoped<ValorParcialValueResolver>();
         builder.Services.AddScoped<ValorTotalValueResolver>();
 
-        builder.Services.AddScoped<ServicoAutenticacao>();
-
         builder.Services.AddAutoMapper(cfg =>
         {
             cfg.AddMaps(Assembly.GetExecutingAssembly());
+        });
+
+        builder.Services.AddScoped<ServicoAutenticacao>();
+
+        builder.Services.AddIdentity<Usuario, Perfil>()
+            .AddEntityFrameworkStores<LocadoraDbContext>()
+            .AddDefaultTokenProviders();
+
+        builder.Services.Configure<IdentityOptions>(options =>
+        {
+            options.Password.RequireDigit = false;
+            options.Password.RequireLowercase = false;
+            options.Password.RequireUppercase = false;
+            options.Password.RequireNonAlphanumeric = false;
+            options.Password.RequiredLength = 3;
+            options.Password.RequiredUniqueChars = 1;
+        });
+
+        builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            .AddCookie(options =>
+            {
+                options.Cookie.Name = "AspNetCore.Cookies";
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+                options.SlidingExpiration = true;
+            });
+
+        builder.Services.ConfigureApplicationCookie(options =>
+        {
+            options.LoginPath = "/Autenticacao/Login";
+            options.AccessDeniedPath = "/Autenticacao/AcessoNegado";
         });
 
         builder.Services.AddControllersWithViews();
