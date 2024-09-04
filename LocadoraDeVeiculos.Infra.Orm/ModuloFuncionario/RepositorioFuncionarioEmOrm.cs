@@ -15,11 +15,18 @@ public class RepositorioFuncionarioEmOrm : RepositorioBaseEmOrm<Funcionario>, IR
         return dbContext.Funcionarios;
     }
 
-    public override Funcionario? SelecionarPorId(int id)
+    public override Funcionario? SelecionarPorId(int funcionarioId)
     {
         return dbContext.Funcionarios
             .Include(u => u.Empresa)
-            .FirstOrDefault(u => u.Id == id);
+            .FirstOrDefault(f => f.Id == funcionarioId);
+    }
+
+    public Funcionario? SelecionarPorId(Func<Funcionario, bool> predicate)
+    {
+        return dbContext.Funcionarios
+            .Include(u => u.Empresa)
+            .FirstOrDefault(predicate);
     }
 
     public List<Funcionario> SelecionarTodos(Func<Funcionario, bool> predicate)

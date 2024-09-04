@@ -28,7 +28,6 @@ using LocadoraDeVeiculos.Infra.Orm.ModuloLocacao;
 using LocadoraDeVeiculos.Infra.Orm.ModuloPlanoCobranca;
 using LocadoraDeVeiculos.Infra.Orm.ModuloTaxa;
 using LocadoraDeVeiculos.Infra.Orm.ModuloVeiculo;
-using LocadoraDeVeiculos.WebApp.Mapping;
 using LocadoraDeVeiculos.WebApp.Mapping.Resolvers;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
