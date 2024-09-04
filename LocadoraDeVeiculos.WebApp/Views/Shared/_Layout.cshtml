@@ -50,6 +50,12 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-controller="Locacao" asp-action="Listar">Locações</a>
                             </li>
+                            @if (User.IsInRole("Empresa"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-controller="Funcionario" asp-action="Listar">Funcionários</a>
+                                </li>
+                            }
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-controller="Combustivel" asp-action="Configurar"><i class="bi bi-gear-fill"></i></a>
                             </li>
