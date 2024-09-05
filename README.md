@@ -1,13 +1,10 @@
 # Locadora De Veiculos 2024
 
 <div style="display: flex; justify-content: center; align-items: center; gap: 15px;">
-	<img width="80" src="">
 	<img width="80" src="https://user-images.githubusercontent.com/25181517/121405754-b4f48f80-c95d-11eb-8893-fc325bde617f.png">
 	<img width="80" src="https://learn.microsoft.com/pt-br/ef/core/what-is-new/ef-core-8.0/ef8.png">
 	<img width="80" src="https://user-images.githubusercontent.com/25181517/184103699-d1b83c07-2d83-4d99-9a1e-83bd89e08117.png">
-
 </div>
-
 
 ## Projeto
 Desenvolvido durante o curso Fullstack da [Academia do Programador](https://www.academiadoprogramador.net) 2024
