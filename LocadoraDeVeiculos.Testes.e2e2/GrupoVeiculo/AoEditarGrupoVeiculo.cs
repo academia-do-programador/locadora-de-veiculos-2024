@@ -1,14 +1,14 @@
 ﻿using LocadoraDeVeiculos.Testes.e2e.Compartilhado;
-using LocadoraDeVeiculos.Testes.e2e.PageObjects;
+using LocadoraDeVeiculos.Testes.e2e.Compartilhado.PageObjects.GrupoVeiculo;
 
 namespace LocadoraDeVeiculos.Testes.e2e.GrupoVeiculo;
 
 [TestClass]
-public class AoEditarGrupoVeiculoRefatorado : TextFixture
+public class AoEditarGrupoVeiculo : TextFixture
 {
     FormularioGrupoVeiculoPageObject grupoVeiculoPage;
 
-    public AoEditarGrupoVeiculoRefatorado()
+    public AoEditarGrupoVeiculo()
     {
         grupoVeiculoPage = new FormularioGrupoVeiculoPageObject(driver);
     }
@@ -21,15 +21,13 @@ public class AoEditarGrupoVeiculoRefatorado : TextFixture
         grupoVeiculoPage.PreencherFormulario(nomeGrupo);
         grupoVeiculoPage.SubmeterFormulario();
 
-        var id = grupoVeiculoPage.GetGrupoVeiculoId(nomeGrupo);
+        var id = grupoVeiculoPage.GetId(nomeGrupo);
 
         grupoVeiculoPage.Visitar(id);
         grupoVeiculoPage.PreencherFormulario(nomeGrupoAtualizado);
         grupoVeiculoPage.SubmeterFormulario();
 
         Assert.IsTrue(driver.PageSource.Contains(nomeGrupoAtualizado));
-
-        grupoVeiculoPage.ExcluirRegistro(nomeGrupoAtualizado);
     }
 
     [TestMethod]

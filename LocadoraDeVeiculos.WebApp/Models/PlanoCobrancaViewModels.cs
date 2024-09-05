@@ -6,6 +6,7 @@ namespace LocadoraDeVeiculos.WebApp.Models;
 public class FormularioPlanoCobrancaViewModel
 {
     [Required(ErrorMessage = "O grupo de veículos é obrigatório")]
+    [Range(1, int.MaxValue, ErrorMessage = "O grupo de veículos é obrigatório")]
     public int GrupoVeiculosId { get; set; }
 
     [Required(ErrorMessage = "O preço diário do plano diário é obrigatório")]

@@ -2,12 +2,10 @@
 using Microsoft.Data.SqlClient;
 using OpenQA.Selenium;
 
-namespace LocadoraDeVeiculos.Testes.e2e.PageObjects;
+namespace LocadoraDeVeiculos.Testes.e2e.Compartilhado.PageObjects.GrupoVeiculo;
 
 public class FormularioGrupoVeiculoPageObject
 {
-    private string connectionString = @"Data Source=(localdb)\mssqllocaldb;Initial Catalog=LocadoraDeVeiculosOrm;Integrated Security=True;Pooling=True";
-
     private IWebDriver driver;
     private By byInputNome;
     private By byBotaoGravar;
@@ -24,7 +22,7 @@ public class FormularioGrupoVeiculoPageObject
 
     public void Visitar(int id = 0)
     {
-        var endereco = "http://localhost:5125/GrupoVeiculos/" + (id == 0 ? "Inserir" : $"Editar/{id}");
+        var endereco = $"{TextFixture.EnderecoBase}/GrupoVeiculos/" + (id == 0 ? "Inserir" : $"Editar/{id}");
 
         driver.Navigate().GoToUrl(endereco);
     }
@@ -53,23 +51,13 @@ public class FormularioGrupoVeiculoPageObject
         }
     }
 
-    public int GetGrupoVeiculoId(string nome)
+    public int GetId(string nome)
     {
-        using (var connection = new SqlConnection(connectionString))
+        using (var connection = new SqlConnection(TextFixture.ConnectionString))
         {
             connection.Open();
             var query = "SELECT TOP 1 ID FROM TBGRUPOVEICULOS WHERE Nome = @Nome";
             return connection.QuerySingleOrDefault<int>(query, new { Nome = nome });
-        }
-    }
-
-    public void ExcluirRegistro(string nome)
-    {
-        using (var connection = new SqlConnection(connectionString))
-        {
-            connection.Open();
-
-            connection.Execute("DELETE FROM TBGRUPOVEICULOS WHERE NOME LIKE @NOME", new { Nome = nome });
         }
     }
 }

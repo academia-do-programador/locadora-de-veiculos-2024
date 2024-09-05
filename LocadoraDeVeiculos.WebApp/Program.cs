@@ -54,11 +54,11 @@ public class Program
         if (!app.Environment.IsDevelopment())
         {
             // Faz com que a aplicação permita apenas conexões HTTPS em navegadores suportados
-            app.UseHsts();
+            //app.UseHsts();
         }
 
         // Redireciona requisições HTTP para HTTPS
-        app.UseHttpsRedirection();
+        //app.UseHttpsRedirection();
 
         app.UseStaticFiles();
 

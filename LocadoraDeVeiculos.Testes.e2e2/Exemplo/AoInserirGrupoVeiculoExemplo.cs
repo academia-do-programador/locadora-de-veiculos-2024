@@ -16,7 +16,7 @@ public class AoInserirGrupoVeiculoExemplo : TextFixture, IDisposable
     [DataRow("Carros de Luxo")]
     public void Dado_info_validas_deve_mostrar_grupo_na_listagem(string nomeGrupo)
     {
-        driver.Navigate().GoToUrl("https://localhost:9100/GrupoVeiculos/Inserir");
+        driver.Navigate().GoToUrl($"{EnderecoBase}/GrupoVeiculos/Inserir");
 
         var inputNome = driver.FindElement(By.Id("Nome"));
         inputNome.SendKeys(nomeGrupo);
@@ -33,7 +33,7 @@ public class AoInserirGrupoVeiculoExemplo : TextFixture, IDisposable
     [DataRow("a", "O nome deve conter ao menos 3 caracteres")]
     public void Dado_info_invalidas_deve_permanecer_na_pagina(string nomeGrupo, string mensagemErro)
     {
-        driver.Navigate().GoToUrl("https://localhost:9100/GrupoVeiculos/Inserir");
+        driver.Navigate().GoToUrl($"{EnderecoBase}/GrupoVeiculos/Inserir");
 
         var inputNome = driver.FindElement(By.Id("Nome"));
         inputNome.SendKeys(nomeGrupo);
@@ -47,16 +47,5 @@ public class AoInserirGrupoVeiculoExemplo : TextFixture, IDisposable
         Assert.AreEqual(mensagemErro, elemento.Text);
 
         Assert.IsTrue(elemento.Displayed);
-    }
-
-
-    public void Dispose()
-    {
-        using (var connection = new SqlConnection(connectionString))
-        {
-            connection.Open();
-
-            connection.Execute("DELETE FROM TBGRUPOVEICULOS WHERE NOME LIKE @NOME", new { Nome = "Carros de Luxo" });
-        }
     }
 }

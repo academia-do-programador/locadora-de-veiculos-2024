@@ -8,7 +8,7 @@ public class AoNavegarParaHome : TextFixture
     [TestMethod]
     public void Deve_mostrar_LocadoraDeVeiculos_no_titulo()
     {
-        driver.Navigate().GoToUrl("https://localhost:9100");
+        driver.Navigate().GoToUrl($"{EnderecoBase}");
 
         Assert.IsTrue(driver.Title.Contains("Locadora De Veículos"));
     }
@@ -16,7 +16,7 @@ public class AoNavegarParaHome : TextFixture
     [TestMethod]
     public void Deve_mostrar_EmConstrucao_na_pagina()
     {
-        driver.Navigate().GoToUrl("https://localhost:9100/home/index");
+        driver.Navigate().GoToUrl($"{EnderecoBase}/home/index");
 
         Assert.IsTrue(driver.PageSource.Contains("Em construção"));
     }
