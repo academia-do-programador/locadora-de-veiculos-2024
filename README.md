@@ -5,7 +5,7 @@
 | <img width="60" src="https://user-images.githubusercontent.com/25181517/121405754-b4f48f80-c95d-11eb-8893-fc325bde617f.png"> | <img width="60" src="https://miro.medium.com/v2/resize:fit:300/0*cdEEkdP1WAuz-Xkb.png"> | <img width="60" src="https://raw.githubusercontent.com/altmann/FluentResults/master/resources/icons/FluentResults-Icon-64.png"> | <img width="60" src="https://rodrigoesilva.wordpress.com/wp-content/uploads/2011/04/sqlserver_sql_server_2008_logo.png"> |
 |:---:|:---:|:---:|:---:|
 | .NET Core | ASP.NET Core | FluentResults | Microsoft SQL Server |
-|
+||
 | <img width="60" src="https://www.infoport.es/wp-content/uploads/2023/09/entity-core.png"> | <img width="60" src="https://api.nuget.org/v3-flatcontainer/dapper/2.1.35/icon"> | <img width="60" src="https://www.lambdatest.com/blog/wp-content/uploads/2021/03/MSTest.png"> | <img width="60" src="https://user-images.githubusercontent.com/25181517/184103699-d1b83c07-2d83-4d99-9a1e-83bd89e08117.png"> |
 | EF Core | Dapper | MSTest | Selenium |
 
@@ -31,58 +31,58 @@
 
 ### Inclui:
 - Testes de Unidade
-- Testes de Integração
+- Testes de IntegraÃ§Ã£o
 - Testes e2e
-- Autenticação e Autorização com Microsoft Identity
+- AutenticaÃ§Ã£o e AutorizaÃ§Ã£o com Microsoft Identity
 ---
 
 ## Detalhes
 
-O sistema visa facilitar o gerenciamento das operações de uma locadora de automóveis,
-abrangendo desde o cadastro de funcionários, grupos de automóveis, veículos e clientes até a
-configuração de preços de aluguéis e devoluções.
+O sistema visa facilitar o gerenciamento das operaÃ§Ãµes de uma locadora de automÃ³veis,
+abrangendo desde o cadastro de funcionÃ¡rios, grupos de automÃ³veis, veÃ­culos e clientes atÃ© a
+configuraÃ§Ã£o de preÃ§os de aluguÃ©is e devoluÃ§Ãµes.
 
-O sistema permitirá a criação de usuários para empresas que desejam utilizar a plataforma para
-gerenciar o aluguel de seus veículos. Usuários administradores dessas empresas terão a
-capacidade de cadastrar e gerenciar seus funcionários, incluindo a ativação e desativação de
-contas de usuário. Esses funcionários realizarão tarefas operacionais, como o cadastro de veículos,
-registro de locações, entre outras atividades relacionadas.
+O sistema permitirÃ¡ a criaÃ§Ã£o de usuÃ¡rios para empresas que desejam utilizar a plataforma para
+gerenciar o aluguel de seus veÃ­culos. UsuÃ¡rios administradores dessas empresas terÃ£o a
+capacidade de cadastrar e gerenciar seus funcionÃ¡rios, incluindo a ativaÃ§Ã£o e desativaÃ§Ã£o de
+contas de usuÃ¡rio. Esses funcionÃ¡rios realizarÃ£o tarefas operacionais, como o cadastro de veÃ­culos,
+registro de locaÃ§Ãµes, entre outras atividades relacionadas.
 
-Além disso, o sistema calcula o valor dos aluguéis considerando diversos fatores, como tipo do
-veículo, plano escolhido e taxas adicionais.
+AlÃ©m disso, o sistema calcula o valor dos aluguÃ©is considerando diversos fatores, como tipo do
+veÃ­culo, plano escolhido e taxas adicionais.
 
-A locadora oferecerá uma lista de taxas e serviços que os clientes poderão adicionar aos aluguéis.
-Cada taxa ou serviço terá um preço e indicação se é fixo ou calculado por dia, afetando o preço
+A locadora oferecerÃ¡ uma lista de taxas e serviÃ§os que os clientes poderÃ£o adicionar aos aluguÃ©is.
+Cada taxa ou serviÃ§o terÃ¡ um preÃ§o e indicaÃ§Ã£o se Ã© fixo ou calculado por dia, afetando o preÃ§o
 total do aluguel.
 
-Será possível registrar a devolução dos veículos, aplicando multas em caso de atraso. O sistema
-também permitirá configurar o preço do combustível para inclusão no cálculo dos aluguéis.
+SerÃ¡ possÃ­vel registrar a devoluÃ§Ã£o dos veÃ­culos, aplicando multas em caso de atraso. O sistema
+tambÃ©m permitirÃ¡ configurar o preÃ§o do combustÃ­vel para inclusÃ£o no cÃ¡lculo dos aluguÃ©is.
 
-O objetivo é proporcionar uma gestão eficiente e uma experiência positiva tanto para os
-funcionários quanto para os clientes da locadora.
+O objetivo Ã© proporcionar uma gestÃ£o eficiente e uma experiÃªncia positiva tanto para os
+funcionÃ¡rios quanto para os clientes da locadora.
 
 ## Requisitos
 
-- .NET SDK (recomendado .NET 8.0 ou superior) para compilação e execução do projeto.
+- .NET SDK (recomendado .NET 8.0 ou superior) para compilaÃ§Ã£o e execuÃ§Ã£o do projeto.
 ---
 ## Como Usar
 
-#### Clone o Repositório
+#### Clone o RepositÃ³rio
 ```
 git clone https://github.com/academia-do-programador/locadora-de-veiculos-2024.git
 ```
 
-#### Navegue até a pasta raiz da solução
+#### Navegue atÃ© a pasta raiz da soluÃ§Ã£o
 ```
 cd locadora-de-veiculos-2024
 ```
 
-#### Restaure as dependências
+#### Restaure as dependÃªncias
 ```
 dotnet restore
 ```
 
-#### Navegue até a pasta do projeto
+#### Navegue atÃ© a pasta do projeto
 ```
 cd LocadoraDeVeiculos.WebApp
 ```
