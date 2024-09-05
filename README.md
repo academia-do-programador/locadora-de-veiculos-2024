@@ -1,20 +1,56 @@
 # Locadora De Veiculos 2024
 
-<div style="display: flex; justify-content: center; align-items: center; gap: 15px;">
-	<img width="80" src="https://user-images.githubusercontent.com/25181517/121405754-b4f48f80-c95d-11eb-8893-fc325bde617f.png">
-	<img width="80" src="https://learn.microsoft.com/pt-br/ef/core/what-is-new/ef-core-8.0/ef8.png">
-	<img width="80" src="https://user-images.githubusercontent.com/25181517/184103699-d1b83c07-2d83-4d99-9a1e-83bd89e08117.png">
+<div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 30px; text-align: center; margin: 70px;">
+	<div style="display: flex; flex-direction: column; align-items: center;">
+		<img height="80" src="https://user-images.githubusercontent.com/25181517/121405754-b4f48f80-c95d-11eb-8893-fc325bde617f.png">
+		<p>.NET Core</p>
+	</div>
+	<div style="display: flex; flex-direction: column; align-items: center;">
+		<img height="80" src="https://miro.medium.com/v2/resize:fit:300/0*cdEEkdP1WAuz-Xkb.png">
+		<p>ASP.NET Core</p>
+	</div>
+		<div style="display: flex; flex-direction: column; align-items: center;">
+		<img height="80" src="https://raw.githubusercontent.com/altmann/FluentResults/master/resources/icons/FluentResults-Icon-64.png">
+		<p>FluentResults</p>
+	</div>
+	<div style="display: flex; flex-direction: column; align-items: center;">
+		<img height="80" src="https://rodrigoesilva.wordpress.com/wp-content/uploads/2011/04/sqlserver_sql_server_2008_logo.png">
+		<p>Microsoft SQL Server</p>
+	</div>
+	<div style="display: flex; flex-direction: column; align-items: center;">
+		<img height="80" src="https://www.infoport.es/wp-content/uploads/2023/09/entity-core.png">
+		<p>EF Core</p>
+	</div>
+	<div style="display: flex; flex-direction: column; align-items: center;">
+		<img height="80" src="https://api.nuget.org/v3-flatcontainer/dapper/2.1.35/icon">
+		<p>Dapper</p>
+	</div>
+	<div style="display: flex; flex-direction: column; align-items: center;">
+		<img height="80" src="https://www.lambdatest.com/blog/wp-content/uploads/2021/03/MSTest.png">
+		<p>MSTest</p>
+	</div>
+	<div style="display: flex; flex-direction: column; align-items: center;">
+		<img height="80" src="https://user-images.githubusercontent.com/25181517/184103699-d1b83c07-2d83-4d99-9a1e-83bd89e08117.png">
+		<p>Selenium</p>
+	</div>
+
 </div>
 
 ## Projeto
-Desenvolvido durante o curso Fullstack da [Academia do Programador](https://www.academiadoprogramador.net) 2024
+**Desenvolvido durante o curso Fullstack da [Academia do Programador](https://www.academiadoprogramador.net) 2024**
+
+### Arquitetura
+- DDD
+- N-Camadas
 
 ### Stack:
 - NET 8.0
 - ASP.NET MVC
+- Microsoft Identity
 - Microsoft SQL Server
 - Entity Framework Core
 - AutoMapper
+- Dapper
 - FluentResults
 - Selenium
 
@@ -22,6 +58,7 @@ Desenvolvido durante o curso Fullstack da [Academia do Programador](https://www.
 - Testes de Unidade
 - Testes de Integração
 - Testes e2e
+- Autenticação e Autorização com Microsoft Identity
 ---
 
 ## Detalhes
