@@ -14,4 +14,18 @@ public class RepositorioTaxaEmOrm : RepositorioBaseEmOrm<Taxa>, IRepositorioTaxa
     {
         return dbContext.Taxas;
     }
+
+    public List<Taxa> SelecionarMuitos(List<int> idsTaxasSelecionadas)
+    {
+        return dbContext.Taxas
+            .Where(taxa => idsTaxasSelecionadas.Contains(taxa.Id))
+            .ToList();
+    }
+
+    public List<Taxa> Filtrar(Func<Taxa, bool> predicate)
+    {
+        return ObterRegistros()
+            .Where(predicate)
+            .ToList();
+    }
 }

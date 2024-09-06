@@ -61,10 +61,20 @@ public class ServicoPlanoCobranca
         return Result.Ok(planoCobranca);
     }
 
-    public Result<List<PlanoCobranca>> SelecionarTodos()
+    public Result<List<PlanoCobranca>> SelecionarTodos(int empresaId)
     {
-        var planosCobranca = repositorioPlanoCobranca.SelecionarTodos();
+        var planosCobranca = repositorioPlanoCobranca.Filtrar(l => l.EmpresaId == empresaId);
 
         return Result.Ok(planosCobranca);
+    }
+
+    public Result<PlanoCobranca> SelecionarPorIdGrupoVeiculos(int grupoVeiculosId)
+    {
+        var plano = repositorioPlanoCobranca.FiltrarPlano(p => p.GrupoVeiculosId == grupoVeiculosId);
+
+        if (plano is null)
+            return Result.Fail("O plano de cobrança não foi encontrado!");
+
+        return Result.Ok(plano);
     }
 }
