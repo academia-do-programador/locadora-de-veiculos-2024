@@ -33,6 +33,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5.3. Interface", "5.3. Inte
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LocadoraDeVeiculos.Testes.e2e", "LocadoraDeVeiculos.Testes.e2e2\LocadoraDeVeiculos.Testes.e2e.csproj", "{8FCC0B88-71B5-4D33-A62B-4798F5228D09}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject1", "TestProject1\TestProject1.csproj", "{55BAE479-E3C7-4F61-A879-657CF3495B3D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +69,10 @@ Global
 		{8FCC0B88-71B5-4D33-A62B-4798F5228D09}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8FCC0B88-71B5-4D33-A62B-4798F5228D09}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8FCC0B88-71B5-4D33-A62B-4798F5228D09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55BAE479-E3C7-4F61-A879-657CF3495B3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55BAE479-E3C7-4F61-A879-657CF3495B3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55BAE479-E3C7-4F61-A879-657CF3495B3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55BAE479-E3C7-4F61-A879-657CF3495B3D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -82,6 +88,7 @@ Global
 		{50DC93B5-75CD-490E-9232-563F0C62FDF6} = {8EA4DCB9-D57C-4EC0-BE9B-6ADE213BBEFD}
 		{0965892D-2B3B-484F-A09C-15EE43818E60} = {919325C3-CE3F-43E9-B1D2-817AA7C3C7A1}
 		{8FCC0B88-71B5-4D33-A62B-4798F5228D09} = {0965892D-2B3B-484F-A09C-15EE43818E60}
+		{55BAE479-E3C7-4F61-A879-657CF3495B3D} = {0965892D-2B3B-484F-A09C-15EE43818E60}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0FCC4149-5777-495C-AB0D-99D563AC33AD}
