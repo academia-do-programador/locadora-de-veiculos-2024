@@ -116,7 +116,7 @@ public class CondutorController : WebControllerBase
         {
             ApresentarMensagemFalha(resultado.ToResult());
 
-            return RedirectToAction(nameof(Listar));
+            return View(); 
         }
 
         ApresentarMensagemSucesso($"O registro ID [{condutor.Id}] foi inserido com sucesso!");
@@ -156,7 +156,7 @@ public class CondutorController : WebControllerBase
 
         ApresentarMensagemSucesso($"O registro ID [{detalhesVm.Id}] foi excluído com sucesso!");
 
-        return RedirectToAction(nameof(Listar));
+        return RedirectToAction(nameof(Listar)); //TODO: OUTRO TESTE
     }
 
     public IActionResult Detalhes(int id)

@@ -1,12 +1,9 @@
-﻿using Dapper;
-using LocadoraDeVeiculos.Testes.e2e.Compartilhado;
-using Microsoft.Data.SqlClient;
+﻿using LocadoraDeVeiculos.Testes.e2e.Compartilhado;
 using OpenQA.Selenium;
 
 namespace LocadoraDeVeiculos.Testes.e2e.Exemplo;
 
-[TestClass]
-public class AoInserirGrupoVeiculoExemplo : TextFixture, IDisposable
+public class AoInserirGrupoVeiculoExemplo : TestFixture, IDisposable
 {
 
     private string connectionString = @"Data Source=(localdb)\mssqllocaldb;Initial Catalog=LocadoraDeVeiculosOrm;Integrated Security=True;Pooling=True";
@@ -16,6 +13,7 @@ public class AoInserirGrupoVeiculoExemplo : TextFixture, IDisposable
     [DataRow("Carros de Luxo")]
     public void Dado_info_validas_deve_mostrar_grupo_na_listagem(string nomeGrupo)
     {
+        //arrange
         driver.Navigate().GoToUrl($"{EnderecoBase}/GrupoVeiculos/Inserir");
 
         var inputNome = driver.FindElement(By.Id("Nome"));
@@ -23,8 +21,10 @@ public class AoInserirGrupoVeiculoExemplo : TextFixture, IDisposable
 
         var botaoGravar = driver.FindElement(By.CssSelector(".btn-primary"));
 
+        //action
         botaoGravar.Click();
 
+        //assert
         Assert.IsTrue(driver.PageSource.Contains(nomeGrupo));
     }
 

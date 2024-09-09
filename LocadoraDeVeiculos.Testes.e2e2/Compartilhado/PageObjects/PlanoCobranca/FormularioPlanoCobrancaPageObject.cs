@@ -12,20 +12,13 @@ public class FormularioPlanoCobrancaPageObject
     private readonly IWebDriver driver;
 
     private readonly By byInputGrupoVeiculo;
-
     private readonly By byInputPrecoDiarioPlanoDiario;
     private readonly By byInputPrecoQuilometroPlanoDiario;
-
     private readonly By byInputQuilometrosDisponiveisPlanoControlado;
     private readonly By byInputPrecoDiarioPlanoControlado;
     private readonly By byInputPrecoQuilometroExtrapoladoPlanoControlado;
-
-
     private readonly By byInputPrecoDiarioPlanoLivre;
-
-
     private readonly By byBotaoGravar;
-
 
     public FormularioPlanoCobrancaPageObject(IWebDriver driver)
     {
@@ -47,16 +40,16 @@ public class FormularioPlanoCobrancaPageObject
 
     public void Visitar(int id = 0)
     {
-        var endereco = $"{TextFixture.EnderecoBase}/PlanoCobranca/" + (id == 0 ? "Inserir" : $"Editar/{id}");
+        var endereco = $"{TestFixture.EnderecoBase}/PlanoCobranca/" + (id == 0 ? "Inserir" : $"Editar/{id}");
 
         driver.Navigate().GoToUrl(endereco);
     }
 
-    public void PreencherFormulario(string grupoVeiculo, 
-        string precoDiarioPlanoDiario, 
+    public void PreencherFormulario(string grupoVeiculo,
+        string precoDiarioPlanoDiario,
         string precoQuilometroPlanoDiario,
-        string quilometrosDisponiveisPlanoControlado, 
-        string precoDiarioPlanoControlado, 
+        string quilometrosDisponiveisPlanoControlado,
+        string precoDiarioPlanoControlado,
         string precoQuilometroExtrapoladoPlanoControlado,
         string precoDiarioPlanoLivre)
     {
@@ -91,16 +84,16 @@ public class FormularioPlanoCobrancaPageObject
         new Actions(driver)
             .ScrollToElement(botaoGravar)
             .Perform();
-        
+
         botaoGravar.Click();
 
         string[] campos = [
-            "GrupoVeiculosId", 
-            "PrecoDiarioPlanoDiario", 
+            "GrupoVeiculosId",
+            "PrecoDiarioPlanoDiario",
             "PrecoQuilometroPlanoDiario",
-            "QuilometrosDisponiveisPlanoControlado", 
+            "QuilometrosDisponiveisPlanoControlado",
             "PrecoDiarioPlanoControlado",
-            "PrecoQuilometroExtrapoladoPlanoControlado", 
+            "PrecoQuilometroExtrapoladoPlanoControlado",
             "PrecoDiarioPlanoLivre"
         ];
 
@@ -118,7 +111,7 @@ public class FormularioPlanoCobrancaPageObject
 
     public int GetId(string precoDiarioPlanoDiario)
     {
-        using (var connection = new SqlConnection(TextFixture.ConnectionString))
+        using (var connection = new SqlConnection(TestFixture.ConnectionString))
         {
             connection.Open();
             var query = "SELECT TOP 1 ID FROM TBPLANOCOBRANCA WHERE PRECODIARIOPLANODIARIO = @PRECODIARIOPLANODIARIO";

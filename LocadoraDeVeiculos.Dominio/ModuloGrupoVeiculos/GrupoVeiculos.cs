@@ -20,8 +20,11 @@ public class GrupoVeiculos : EntidadeBase
     {
         List<string> erros = [];
 
-        if (Nome.Length < 3)
+        if (string.IsNullOrEmpty(Nome))
             erros.Add("O nome é obrigatório");
+
+        else if (Nome.Length < 3)
+            erros.Add("O nome deve ser maior que três letras");
 
         return erros;
     }

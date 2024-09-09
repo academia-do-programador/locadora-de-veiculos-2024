@@ -3,7 +3,7 @@
 namespace LocadoraDeVeiculos.Testes.e2e.PlanoCobranca;
 
 [TestClass]
-public class AoNavegarParaListaPlanoCobranca : TextFixture
+public class AoNavegarParaListaPlanoCobranca : TestFixture
 {
 
     [TestMethod]

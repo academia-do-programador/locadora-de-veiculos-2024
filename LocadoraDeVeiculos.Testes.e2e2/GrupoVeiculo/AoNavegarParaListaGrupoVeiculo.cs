@@ -3,7 +3,7 @@
 namespace LocadoraDeVeiculos.Testes.e2e.GrupoVeiculo;
 
 [TestClass]
-public class AoNavegarParaListaGrupoVeiculo : TextFixture
+public class AoNavegarParaListaGrupoVeiculo : TestFixture
 {
 
     [TestMethod]

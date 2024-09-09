@@ -22,7 +22,7 @@ public class FormularioGrupoVeiculoPageObject
 
     public void Visitar(int id = 0)
     {
-        var endereco = $"{TextFixture.EnderecoBase}/GrupoVeiculos/" + (id == 0 ? "Inserir" : $"Editar/{id}");
+        var endereco = $"{TestFixture.EnderecoBase}/GrupoVeiculos/" + (id == 0 ? "Inserir" : $"Editar/{id}");
 
         driver.Navigate().GoToUrl(endereco);
     }
@@ -53,7 +53,7 @@ public class FormularioGrupoVeiculoPageObject
 
     public int GetId(string nome)
     {
-        using (var connection = new SqlConnection(TextFixture.ConnectionString))
+        using (var connection = new SqlConnection(TestFixture.ConnectionString))
         {
             connection.Open();
             var query = "SELECT TOP 1 ID FROM TBGRUPOVEICULOS WHERE Nome = @Nome";

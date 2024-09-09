@@ -4,7 +4,7 @@ using LocadoraDeVeiculos.Testes.e2e.Compartilhado.PageObjects.GrupoVeiculo;
 namespace LocadoraDeVeiculos.Testes.e2e.GrupoVeiculo;
 
 [TestClass]
-public class AoEditarGrupoVeiculo : TextFixture
+public class AoEditarGrupoVeiculo : TestFixture
 {
     FormularioGrupoVeiculoPageObject grupoVeiculoPage;
 

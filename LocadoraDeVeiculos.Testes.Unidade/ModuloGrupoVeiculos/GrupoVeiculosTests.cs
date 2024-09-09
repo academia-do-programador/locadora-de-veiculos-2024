@@ -8,9 +8,10 @@ public class GrupoVeiculosTests
 {
 
     [TestMethod]
-    public void Deve_Criar_Instancia_Valida()
+    [DataRow("SUV")]
+    public void Deve_Criar_Instancia_Valida(string nomeGrupo)
     {
-        var grupo = new GrupoVeiculos("SUV");
+        var grupo = new GrupoVeiculos(nomeGrupo);
 
         var erros = grupo.Validar();
 
@@ -18,15 +19,17 @@ public class GrupoVeiculosTests
     }
 
     [TestMethod]
-    public void Deve_Criar_Instancia_Com_Erro()
+    [DataRow("", "O nome é obrigatório")]
+    [DataRow("AB", "O nome deve ser maior que três letras")]
+    public void Deve_Criar_Instancia_Com_Erro(string nomeGrupo, string mensagemErro)
     {
-        var grupo = new GrupoVeiculos("");
+        var grupo = new GrupoVeiculos(nomeGrupo);
 
         var erros = grupo.Validar();
 
-        List<string> errosEsperados = ["O nome é obrigatório"];
-
         Assert.AreEqual(1, erros.Count);
-        CollectionAssert.AreEqual(errosEsperados, erros);
+        Assert.AreEqual(mensagemErro, erros[0]);
     }
 }
+
+

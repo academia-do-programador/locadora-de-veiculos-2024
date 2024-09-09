@@ -67,6 +67,19 @@
                                 </a>
                             </li>
 
+                            <li class="nav-item">
+                                <a href="/Cliente/Listar" title="Clientes" class="nav-link align-middle px-0  text-decoration-none text-primary">
+                                    <i class="fs-4 bi-person-video"></i> <span class="ms-1 d-none d-sm-inline">Clientes</span>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="/Condutor/Listar" title="Condutores" class="nav-link align-middle px-0  text-decoration-none text-primary">
+                                    <i class="fs-4 bi-person-vcard-fill"></i> <span class="ms-1 d-none d-sm-inline">Condutores</span>
+                                </a>
+                            </li>
+
+
                             @if (User.IsInRole("Empresa"))
                             {
                                 <li class="nav-item">
@@ -111,6 +124,7 @@
                     }
                 </div>
             </nav>
+
             <div class="col py-5">
                 <main role="main" class="container-sm">
                     <h1 class="fw-semibold">@ViewBag.Title</h1>
@@ -120,6 +134,7 @@
                     @RenderBody()
                 </main>
             </div>
+
         </div>
     </div>
 

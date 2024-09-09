@@ -1,11 +1,12 @@
 ﻿using LocadoraDeVeiculos.Testes.e2e.Compartilhado;
 using LocadoraDeVeiculos.Testes.e2e.Compartilhado.PageObjects.GrupoVeiculo;
 using LocadoraDeVeiculos.Testes.e2e.Compartilhado.PageObjects.PlanoCobranca;
+using OpenQA.Selenium;
 
 namespace LocadoraDeVeiculos.Testes.e2e.PlanoCobranca;
 
 [TestClass]
-public class AoInserirPlanoCobranca : TextFixture
+public class AoInserirPlanoCobranca : TestFixture
 {
     FormularioGrupoVeiculoPageObject grupoVeiculoPage;
     FormularioPlanoCobrancaPageObject planoCobrancaPage;
@@ -25,8 +26,7 @@ public class AoInserirPlanoCobranca : TextFixture
         grupoVeiculoPage.SubmeterFormulario();
 
         planoCobrancaPage.Visitar();
-        string precoDiarioPlanoDiario = "100";
-        planoCobrancaPage.PreencherFormulario(nomeGrupo, precoDiarioPlanoDiario, "10", "10", "10", "10", "10");
+        planoCobrancaPage.PreencherFormulario(nomeGrupo, "10", "10", "10", "10", "10", "10");
 
         planoCobrancaPage.SubmeterFormulario();
 
@@ -34,7 +34,7 @@ public class AoInserirPlanoCobranca : TextFixture
     }
 
     [TestMethod]
-    public void Dado_info_invalidas_deve_permanecer_na_pagina()
+    public void Dado_info_invalidas_deve_permanecer_no_formulario_do_PlanoDeCobranca()
     {
         planoCobrancaPage.Visitar();
 
@@ -42,7 +42,7 @@ public class AoInserirPlanoCobranca : TextFixture
 
         planoCobrancaPage.SubmeterFormulario();
 
-        var elemento = planoCobrancaPage.Erros["GrupoVeiculosId"];
+        var elemento = driver.FindElement(By.CssSelector(".field-validation-error[data-valmsg-for='GrupoVeiculosId']"));
 
         Assert.AreEqual("O grupo de veículos é obrigatório", elemento.Text);
         Assert.IsTrue(elemento.Displayed);

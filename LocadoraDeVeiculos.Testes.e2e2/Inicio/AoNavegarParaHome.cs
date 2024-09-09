@@ -3,7 +3,7 @@ using LocadoraDeVeiculos.Testes.e2e.Compartilhado;
 namespace LocadoraDeVeiculos.Testes.e2e.Inicio;
 
 [TestClass]
-public class AoNavegarParaHome : TextFixture
+public class AoNavegarParaHome : TestFixture
 {
     [TestMethod]
     public void Deve_mostrar_LocadoraDeVeiculos_no_titulo()
@@ -16,14 +16,8 @@ public class AoNavegarParaHome : TextFixture
     [TestMethod]
     public void Deve_mostrar_EmConstrucao_na_pagina()
     {
-        driver.Navigate().GoToUrl($"{EnderecoBase}/home/index");
+        driver.Navigate().GoToUrl($"{EnderecoBase}");
 
-        Assert.IsTrue(driver.PageSource.Contains("Em construção"));
+        Assert.IsTrue(driver.PageSource.Contains("Seja bem-vindo(a)!"));
     }
-
 }
-
-//pacotes selenium webdriver
-//abrir site academia do programador
-//testar localhost
-//nomenclatura

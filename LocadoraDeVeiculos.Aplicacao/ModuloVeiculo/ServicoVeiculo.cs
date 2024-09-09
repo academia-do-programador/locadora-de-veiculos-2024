@@ -31,6 +31,7 @@ public class ServicoVeiculo
         veiculo.TipoCombustivel = veiculoAtualizado.TipoCombustivel;
         veiculo.CapacidadeTanque = veiculoAtualizado.CapacidadeTanque;
         veiculo.GrupoVeiculosId = veiculoAtualizado.GrupoVeiculosId;
+        veiculo.Foto = veiculoAtualizado.Foto;
 
         repositorioVeiculo.Editar(veiculo);
 
